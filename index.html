@@ -1,1 +1,365 @@
-a
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ドクター結城の診察日記 ～白衣の裏側～</title>
+<style>
+  :root{
+    --bg:#bfe0dc;
+    --bg2:#a9d2cd;
+    --navy:#0a2a6b;
+    --blue:#3a6ed8;
+    --paper:#fffff4;
+    --line:#7aa7a1;
+    --red:#d3202a;
+    --pink:#ff5aa5;
+    --ink:#1a1a1a;
+    --link:#0000ee;
+    --visited:#551a8b;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:auto}
+  body{
+    margin:0;
+    color:var(--ink);
+    font-family:"ＭＳ Ｐゴシック","MS PGothic","Osaka","Hiragino Kaku Gothic ProN","Meiryo",sans-serif;
+    font-size:14px;
+    line-height:1.7;
+    background-color:var(--bg);
+    background-image:
+      linear-gradient(45deg,var(--bg2) 25%,transparent 25%,transparent 75%,var(--bg2) 75%),
+      linear-gradient(45deg,var(--bg2) 25%,transparent 25%,transparent 75%,var(--bg2) 75%);
+    background-size:16px 16px;
+    background-position:0 0,8px 8px;
+  }
+  a{color:var(--link)}
+  a:visited{color:var(--visited)}
+  a:focus-visible,button:focus-visible{outline:2px dashed var(--red);outline-offset:2px}
+
+  .wrap{max-width:860px;margin:0 auto;padding:8px}
+
+  /* ---- ticker ---- */
+  .ticker{
+    background:#000;color:#39ff14;
+    border:2px inset #888;
+    overflow:hidden;white-space:nowrap;
+    font-size:13px;padding:2px 0;
+  }
+  .ticker span{display:inline-block;padding-left:100%;animation:scroll 22s linear infinite}
+  @keyframes scroll{to{transform:translateX(-100%)}}
+
+  /* ---- header ---- */
+  header.top{
+    margin-top:8px;
+    border:3px ridge #e8e8e8;
+    background:linear-gradient(180deg,#ffffff 0%,#d9ecff 55%,#9cc4f5 100%);
+    text-align:center;
+    padding:14px 8px 10px;
+    position:relative;
+  }
+  .cross{
+    display:inline-block;width:34px;height:34px;position:relative;vertical-align:middle;margin-right:6px;
+  }
+  .cross:before,.cross:after{content:"";position:absolute;background:var(--red);border:1px solid #7d0b11}
+  .cross:before{left:12px;top:0;width:10px;height:34px}
+  .cross:after{left:0;top:12px;width:34px;height:10px}
+  header.top h1{
+    margin:0;font-size:28px;line-height:1.25;color:var(--navy);
+    text-shadow:2px 2px 0 #fff,3px 3px 0 #7fa6e6;
+    letter-spacing:1px;font-family:"ＭＳ Ｐ明朝","MS PMincho","Hiragino Mincho ProN","Yu Mincho",serif;
+  }
+  header.top .sub{margin:4px 0 0;color:#234;font-size:13px}
+  .welcome{margin:8px 0 0;font-size:12px;color:#333}
+  .blink{animation:blink 1.1s steps(1) infinite;color:var(--red);font-weight:bold}
+  @keyframes blink{50%{visibility:hidden}}
+
+  .rainbow{
+    height:6px;border:0;margin:10px 0;
+    background:linear-gradient(90deg,#f00,#f80,#ee0,#0b0,#08f,#80f,#f00);
+  }
+
+  /* ---- layout ---- */
+  .cols{display:grid;grid-template-columns:200px 1fr;gap:8px;margin-top:8px;align-items:start}
+  .box{
+    background:var(--paper);
+    border:2px outset #ddd;
+    margin-bottom:8px;
+  }
+  .box h2{
+    margin:0;padding:3px 8px;font-size:13px;color:#fff;
+    background:linear-gradient(90deg,var(--navy),var(--blue));
+    border-bottom:2px solid #fff;
+  }
+  .box .in{padding:8px}
+  .box ul{margin:0;padding-left:16px}
+  .box li{margin-bottom:3px}
+  .dead{color:#555;cursor:not-allowed;text-decoration:underline dotted}
+
+  .prof dl{margin:0;font-size:12px}
+  .prof dt{float:left;clear:left;width:4.2em;color:var(--navy);font-weight:bold}
+  .prof dd{margin:0 0 2px 4.2em}
+  .portrait{
+    width:96px;height:112px;margin:0 auto 8px;display:block;
+    border:2px inset #999;background:#e4e4e4;
+  }
+
+  .counter{text-align:center}
+  .digits{display:inline-flex;gap:2px;margin:4px 0}
+  .digits b{
+    font-family:"Courier New",monospace;font-size:20px;color:#ffeb3b;background:#111;
+    padding:0 5px;border:1px solid #666;line-height:1.3;
+  }
+  .small{font-size:11px;color:#444}
+
+  .banners{display:flex;flex-wrap:wrap;gap:4px;justify-content:center}
+  .ban{
+    width:88px;height:31px;display:flex;align-items:center;justify-content:center;
+    font-size:10px;line-height:1.1;text-align:center;border:1px solid #333;color:#fff;
+  }
+  .ban.a{background:linear-gradient(#e33,#900)}
+  .ban.b{background:linear-gradient(#39f,#036)}
+  .ban.c{background:linear-gradient(#6c6,#262)}
+  .ban.d{background:linear-gradient(#999,#444)}
+
+  /* ---- entry ---- */
+  .entry-head{
+    background:linear-gradient(90deg,#fff 0%,#ffd6e8 100%);
+    border-bottom:2px dotted var(--pink);
+    padding:6px 10px;
+  }
+  .entry-head .date{font-size:12px;color:#555}
+  .entry-head h3{margin:0;font-size:19px;color:var(--navy);font-family:"ＭＳ Ｐ明朝","MS PMincho","Hiragino Mincho ProN","Yu Mincho",serif}
+  .entry-body{padding:12px 14px}
+  .entry-body p{margin:0 0 1em}
+  .entry-body .quiet{color:#555;font-size:12px}
+  .hl{background:linear-gradient(transparent 60%,#fff176 60%)}
+  .red{color:var(--red);font-weight:bold}
+  .blue{color:#0033cc;font-weight:bold}
+
+  table.memo{
+    border-collapse:collapse;margin:6px 0 12px;font-size:12px;width:100%;max-width:520px;background:#fff;
+  }
+  table.memo th,table.memo td{border:1px solid #666;padding:3px 8px;text-align:left}
+  table.memo th{background:#d9ecff}
+
+  .antidote{
+    margin:14px 0;
+    border:3px double var(--red);
+    background:#fff3f3;
+    padding:10px 12px;
+  }
+  .antidote h4{margin:0 0 6px;font-size:15px;color:var(--red)}
+  .antidote ol{margin:0;padding-left:20px}
+  .antidote .pass{
+    display:inline-block;margin:4px 0;padding:2px 10px;background:#000;color:#39ff14;
+    font-family:"Courier New",monospace;font-size:16px;letter-spacing:1px;
+  }
+
+  .sig{text-align:right;margin-top:14px}
+  .entry-foot{
+    border-top:1px dotted #888;padding:4px 10px;font-size:12px;color:#444;
+    display:flex;flex-wrap:wrap;gap:12px;
+  }
+
+  /* ---- comments ---- */
+  .cm{border-bottom:1px dashed #999;padding:6px 0}
+  .cm:last-child{border-bottom:0}
+  .cm .who{font-size:12px;color:#006;font-weight:bold}
+  .cm .when{font-size:11px;color:#777;margin-left:6px;font-weight:normal}
+  .cm p{margin:2px 0 0}
+
+  footer.bot{
+    text-align:center;font-size:11px;color:#234;margin:14px 0 24px;
+  }
+  footer.bot .cons{
+    display:inline-block;margin-bottom:6px;padding:3px 10px;border:2px solid #000;
+    background:repeating-linear-gradient(45deg,#ffd400 0 10px,#222 10px 20px);
+  }
+  footer.bot .cons span{background:#ffd400;padding:0 6px;color:#000;font-weight:bold}
+
+  @media (max-width:640px){
+    .cols{grid-template-columns:1fr}
+    .main{order:-1}
+    header.top h1{font-size:22px}
+    .entry-head h3{font-size:17px}
+  }
+  @media (prefers-reduced-motion:reduce){
+    .ticker span{animation:none;padding-left:0;white-space:normal}
+    .blink{animation:none}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="ticker" aria-hidden="true"><span>★☆★ ご来訪ありがとうございます ★☆★ 当ブログは医療相談を受け付けておりません ★ キリ番踏んだ方は掲示板までご一報を ★ ブログ更新は不定期です ★☆★</span></div>
+
+  <header class="top">
+    <h1><span class="cross" aria-hidden="true"></span>ドクター結城の診察日記</h1>
+    <p class="sub">～白衣の裏側～　とある病院に勤める内科医の、ひとりごと</p>
+    <p class="welcome">ようこそ！　あなたは <b>3,184</b> 人目のお客様です　<span class="blink">NEW!</span></p>
+  </header>
+
+  <div class="cols">
+
+    <!-- ===== 左サイドバー ===== -->
+    <aside class="side">
+      <div class="box prof">
+        <h2>■ プロフィール</h2>
+        <div class="in">
+          <svg class="portrait" viewBox="0 0 96 112" role="img" aria-label="ドクターのアイコン（白衣のシルエット）">
+            <rect width="96" height="112" fill="#e4e4e4"/>
+            <circle cx="48" cy="38" r="17" fill="#555"/>
+            <path d="M10 112 L16 76 Q48 58 80 76 L86 112 Z" fill="#fff" stroke="#555" stroke-width="2"/>
+            <path d="M40 66 L48 86 L56 66" fill="none" stroke="#555" stroke-width="2"/>
+            <rect x="56" y="82" width="12" height="8" fill="#fff" stroke="#d3202a" stroke-width="1.5"/>
+          </svg>
+          <dl>
+            <dt>HN</dt><dd>Dr.ユウキ</dd>
+            <dt>本名</dt><dd>結城 恭介</dd>
+            <dt>年齢</dt><dd>34歳</dd>
+            <dt>職業</dt><dd>内科医（臨床試験担当）</dd>
+            <dt>勤務</dt><dd>あおぞら総合病院</dd>
+            <dt>趣味</dt><dd>バラの栽培、深夜ラジオ、コンビニ新商品めぐり</dd>
+            <dt>血液型</dt><dd>A型（きっちり）</dd>
+          </dl>
+        </div>
+      </div>
+
+      <div class="box">
+        <h2>■ メニュー</h2>
+        <div class="in">
+          <ul>
+            <li><a href="#top-entry">最新の日記</a></li>
+            <li><span class="dead" title="準備中">過去ログ</span></li>
+            <li><span class="dead" title="準備中">掲示板 (BBS)</span></li>
+            <li><span class="dead" title="準備中">リンク集</span></li>
+            <li><span class="dead" title="準備中">薔薇のアルバム</span></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="box">
+        <h2>■ 更新履歴</h2>
+        <div class="in small">
+          <ul>
+            <li><b>04/10/11</b> 最後の診察記録 <span class="blink">NEW</span></li>
+            <li>04/10/09 雨の日の外来</li>
+            <li>04/10/05 当直明けのラーメン</li>
+            <li>04/10/02 学会発表おわった…</li>
+            <li>04/09/28 薬剤部の人と飲み</li>
+            <li>04/09/21 バラ、また咲いた</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="box counter">
+        <h2>■ カウンター</h2>
+        <div class="in">
+          <div class="small">あなたは</div>
+          <div class="digits" role="img" aria-label="3184"><b>0</b><b>0</b><b>3</b><b>1</b><b>8</b><b>4</b></div>
+          <div class="small">人目です。<br>キリ番(3200)ゲットの方は<br>ご報告ください</div>
+        </div>
+      </div>
+
+      <div class="box">
+        <h2>■ 相互リンク</h2>
+        <div class="in">
+          <div class="banners" aria-hidden="true">
+            <div class="ban a">看護師<br>日記帳</div>
+            <div class="ban b">夜勤明け<br>ラジオ局</div>
+            <div class="ban c">薔薇<br>愛好会</div>
+            <div class="ban d">リンクフリー<br>です</div>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- ===== メイン ===== -->
+    <main class="main">
+
+      <article class="box" id="top-entry">
+        <div class="entry-head">
+          <div class="date">2004年10月11日（月） 天気：雨のち曇り　気分：ふつう…ではない</div>
+          <h3>最後の診察記録</h3>
+        </div>
+
+        <div class="entry-body">
+          <p>このページを見つけた誰かへ。</p>
+
+          <p>たぶん君は、受付で<b>白い薬</b>を飲まされた人だと思う。「緊張をやわらげる薬ですよ」と言われたはずだ。うちの病院の、いつもの説明だね。</p>
+
+          <p>先に結論を書く。あの薬は、緊張をやわらげる薬ではない。<span class="hl">飲んだ人の目には、赤と青が入れ替わって見える。</span>それだけの薬だ。「それだけ」と言えるうちはまだいい。</p>
+
+          <p>僕は臨床試験の担当だった。被験者の何人かが「バラの色がおかしい」「信号の見え方が逆になった」と訴えてきた。最初は気のせいだと思った。でも3人、5人と同じことを言う。確かめて、報告書にまとめて、上に出した。</p>
+
+          <p>返ってきたのは「この件は伏せるように」の一言だった。院は最初から知っていたんだと思う。知っていて、あの薬を配り続けている。</p>
+
+          <table class="memo" summary="色の見え方の変化">
+            <tr><th>君に見えている色</th><th>本当の色</th></tr>
+            <tr><td><span class="blue">青</span></td><td><span class="red">赤</span></td></tr>
+            <tr><td><span class="red">赤</span></td><td><span class="blue">青</span></td></tr>
+            <tr><td>黄・緑・橙・紫</td><td>そのまま（変わらない）</td></tr>
+          </table>
+
+          <p>ここまでは、まだ不便なだけで済む。問題は、薬の<b>飲み合わせ</b>だ。</p>
+
+          <p>薬の色はラベルの色で区別している。赤と青が入れ替わって見える人は、<span class="red">赤と思って飲んだものが青で、青と思って飲んだものが赤</span>になる。だから「飲んでも安全」と書いてある組み合わせが、本当は一番危ない組み合わせになることがある。</p>
+
+          <p>もし君が、薬の一覧を信じて、「クリア」と書かれた組み合わせを飲んだのなら……落ち着いて、これを読んでほしい。</p>
+
+          <div class="antidote">
+            <h4>◆ 解毒の方法 ◆</h4>
+            <p style="margin:0 0 6px">次の2つを、続けて飲む。それで毒も、目の見え方も戻る。</p>
+            <div class="pass">ナツメジン ＋ キュトリン</div>
+          </div>
+
+          <p>これを書き終えたら、僕は病院を出る。ここにいると、また「伏せろ」と言われるだけだから。</p>
+
+          <p>最後に。バラは、ちゃんと赤かった。君の目には青く見えていたとしても、赤かった。それだけは覚えておいてほしい。</p>
+
+          <p class="sig">結城 恭介 ／ 2004.10.11 23:48</p>
+        </div>
+
+        <div class="entry-foot">
+          <span>カテゴリ： 日記</span>
+          <span>コメント(3)</span>
+          <span>トラックバック(0)</span>
+          <span>拍手 ♥ 12</span>
+        </div>
+      </article>
+
+      <section class="box" aria-label="コメント">
+        <h2>■ コメント</h2>
+        <div class="in">
+          <div class="cm">
+            <div class="who">薬剤部のT<span class="when">2004/10/12 07:15</span></div>
+            <p>先生、昨日の夜から連絡がつきません。この記事、見ました。何も言わずに行かないでください。</p>
+          </div>
+          <div class="cm">
+            <div class="who">通りすがり<span class="when">2004/10/12 12:40</span></div>
+            <p>バラの写真、また見たかったです。更新待ってます。</p>
+          </div>
+          <div class="cm">
+            <div class="who">看護師M<span class="when">2004/10/13 02:03</span></div>
+            <p>先生、この記事、読みました。上には言っていません。無事なら、一言だけでいいので、ください。</p>
+          </div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <hr class="rainbow">
+
+  <footer class="bot">
+    <div class="cons"><span>UNDER CONSTRUCTION</span> 掲示板・リンク集は準備中です</div><br>
+    当サイトの文章・画像の無断転載はご遠慮ください。<br>
+    このページは 1024×768 / Internet Explorer 6.0 以上を推奨しています。<br>
+    Copyright (C) 2004 Dr.Yuki All Rights Reserved.
+  </footer>
+
+</div>
+</body>
+</html>
